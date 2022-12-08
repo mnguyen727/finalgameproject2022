@@ -50,7 +50,6 @@ FPS = 60
 CONTROLS = 1
 
 # player settings
-PLAYER_GRAV = 0.6
 PLAYER_FRIC = 0.1
 SCORE = 100
 
@@ -80,7 +79,7 @@ class Player(Sprite):
         self.image.fill(GREEN)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
-        self.pos = vec(WIDTH/2, HEIGHT/2)
+        self.pos = vec(WIDTH/7, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
     
@@ -103,7 +102,6 @@ class Player(Sprite):
         if hits:
             self.vel.y = -22
     def update(self):
-        self.acc = vec(0,PLAYER_GRAV)
         self.controls()
         # friction
         self.acc.x += self.vel.x * -0.1

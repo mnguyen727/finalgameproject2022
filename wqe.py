@@ -1,4 +1,5 @@
 from settings import *
+from pygame.locals import *
 
 vec = pg.math.Vector2
 
@@ -20,15 +21,20 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-class players(pygame.sprite.Sprite):
-    def __init__(self, picture_path):
-        super().__init__()
-        self.image = pygame.image.load(picture_path)
-        self.rect = self.image.get_rect()
+#instantiate the class
+class player(pygame.sprite.Sprite):
+    def __inity__(self,x,y):
+            pygame.sprite.Sprite.__init__(self)
+            self.image = pygame.image.load('tiny_ship.png')
+            self.rect = self.image.get_rect()
+            self.rect.center = [x,y]
 
-player = players("tiny_ship.png")
-player_group = pygame.sprite.Group()
-player_group.add(player)
+player_group = pygame.sprite.Sprite.groups()
+
+ship = player(100, int(HEIGHT / 2))
+
+player_group.add(ship)
+
 
 #moving background
 pygame.init()
@@ -38,11 +44,12 @@ window = pygame.display.set_mode((width,height))
 bg_img = pygame.image.load('space.png')
 bg_img = pygame.transform.scale(bg_img,(width,height))
 
+player_group.draw(window)
 
 i = 0
  
-running = True
-while running:
+runing = True
+while runing:
     window.fill((0,0,0))
     window.blit(bg_img,(i,0))
     window.blit(bg_img,(width+i,0))
@@ -54,7 +61,5 @@ while running:
         if event.type == QUIT:
             runing = False
     pygame.display.update()
-    player_group.draw(window)
 pygame.quit()
-
-
+pygame.quit()
