@@ -1,13 +1,20 @@
+#Matthew Nguyen
+
 import pygame
 from sys import exit
 import random
 from random import randint
+from pygame import mixer
 
 #starts pygame
 pygame.init()
 screen = pygame.display.set_mode((1000,550))
 pygame.display.set_caption('space shooter')
 clock = pygame.time.Clock()
+
+#MUSIC PRETTY COOL
+mixer.music.load ('csm.wav')
+mixer.music.play (-1)
 
 ship_surface = pygame.Surface((100,100))
 
@@ -73,7 +80,6 @@ while True:
     screen.blit(rock4,(rock_x_pos4,450))
     rock_x_pos4 -= 11
     if rock_x_pos4 < -100: rock_x_pos4 = 1000
-
 
     #updates
     pygame.display.update()
