@@ -1,48 +1,48 @@
-from settings import *
+import pygame
 
-vec = pg.math.Vector2
+height = 500
+width = 800
 
-# game settings 
-WIDTH = 1200
-HEIGHT = 600
-FPS = 60
-CONTROLS = 1
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption('test screen')
+bg = pygame.image.load('space.png')
 
-# player settings
-PLAYER_GRAV = 0.6
-PLAYER_FRIC = 0.1
-SCORE = 100
+#button images
+start_image = pygame.image.load('start.png').convert_alpha()
 
-# define colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
-class Player(Sprite):
-    def __init__(self):
-        Sprite.__init__(self)
-        self.image = pg.Surface((50, 50))
-        self.image.fill(GREEN)
+class Button():
+    def __init__(self, x, y, image):
+        self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH/2, HEIGHT/2)
-        self.pos = vec(WIDTH/2, HEIGHT/2)
-        self.vel = vec(0,0)
-        self.acc = vec(0,0)
+        self.rect.topleft = (x, y)
 
-#instantiate the class
-player = Player()
+    def draw(self):
+        pos = pygame.mouse.get_pos()
+        
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                screen.blit((bg,0,0))
 
-pygame.init()
-width = 1200
-height = 600
-window = pygame.display.set_mode((width,height))
-bg_img = pygame.image.load('space.png')
-bg_img = pygame.transform.scale(bg_img,(width,height))
-clock = pg.time.Clock()
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
 
-running = True
-while running:
-    # keep the loop running using clock
-    clock.tick(FPS)
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
+start_button = Button(135, 130, start_image)
+
+#loop
+while True:
+
+    screen.blit(bg,(0,0))
+
+    start_button.draw()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+            pygame.quit()
+            exit()
+
+
+    pygame.display.update()

@@ -1,60 +1,72 @@
-from settings import *
-
-vec = pg.math.Vector2
-
-# game settings 
-WIDTH = 1200
-HEIGHT = 600
-FPS = 60
-CONTROLS = 1
-
-# player settings
-PLAYER_GRAV = 0.6
-PLAYER_FRIC = 0.1
-SCORE = 100
-
-# define colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
-class players(pygame.sprite.Sprite):
-    def __init__(self, picture_path):
-        super().__init__()
-        self.image = pygame.image.load(picture_path)
-        self.rect = self.image.get_rect()
-
-player = players("tiny_ship.png")
-player_group = pygame.sprite.Group()
-player_group.add(player)
-
-#moving background
-pygame.init()
-width = 1200
-height = 600
-window = pygame.display.set_mode((width,height))
-bg_img = pygame.image.load('space.png')
-bg_img = pygame.transform.scale(bg_img,(width,height))
-
-
-i = 0
- 
-running = True
-while running:
-    window.fill((0,0,0))
-    window.blit(bg_img,(i,0))
-    window.blit(bg_img,(width+i,0))
-    if (i==-width):
-        window.blit(bg_img,(width+i,0))
-        i=0
-    i-=1
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            runing = False
-    pygame.display.update()
-    player_group.draw(window)
-pygame.quit()
-
-
+import pygame 
+import sys 
+  
+  
+# initializing the constructor 
+pygame.init() 
+  
+# screen resolution 
+res = (720,720) 
+  
+# opens up a window 
+screen = pygame.display.set_mode(res) 
+  
+# white color 
+color = (255,255,255) 
+  
+# light shade of the button 
+color_light = (170,170,170) 
+  
+# dark shade of the button 
+color_dark = (100,100,100) 
+  
+# stores the width of the 
+# screen into a variable 
+width = screen.get_width() 
+  
+# stores the height of the 
+# screen into a variable 
+height = screen.get_height() 
+  
+# defining a font 
+smallfont = pygame.font.SysFont('Corbel',35) 
+  
+# rendering a text written in 
+# this font 
+text = smallfont.render('quit' , True , color) 
+  
+while True: 
+      
+    for ev in pygame.event.get(): 
+          
+        if ev.type == pygame.QUIT: 
+            pygame.quit() 
+              
+        #checks if a mouse is clicked 
+        if ev.type == pygame.MOUSEBUTTONDOWN: 
+              
+            #if the mouse is clicked on the 
+            # button the game is terminated 
+            if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40: 
+                pygame.quit() 
+                  
+    # fills the screen with a color 
+    screen.fill((60,25,60)) 
+      
+    # stores the (x,y) coordinates into 
+    # the variable as a tuple 
+    mouse = pygame.mouse.get_pos() 
+      
+    # if mouse is hovered on a button it 
+    # changes to lighter shade 
+    if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40: 
+        pygame.draw.rect(screen,color_light,[width/2,height/2,140,40]) 
+          
+    else: 
+        pygame.draw.rect(screen,color_dark,[width/2,height/2,140,40]) 
+      
+    # superimposing the text onto our button 
+    screen.blit(text , (width/2+50,height/2)) 
+      
+    # updates the frames of the game 
+    pygame.display.update() 

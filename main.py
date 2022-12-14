@@ -13,8 +13,9 @@ pygame.display.set_caption('space shooter')
 clock = pygame.time.Clock()
 
 #MUSIC PRETTY COOL
-mixer.music.load ('csm.wav')
+mixer.music.load ('csm1.wav')
 mixer.music.play (-1)
+
 
 ship_surface = pygame.Surface((100,100))
 
@@ -62,24 +63,26 @@ while True:
         ship_y_pos += 5
 
     screen.blit(rock,(rock_x_pos,50))
-    rock_x_pos -= 10
+    rock_x_pos -= 17
     if rock_x_pos < -100: rock_x_pos = 1000
 
     screen.blit(rock1,(rock_x_pos1,150))
-    rock_x_pos1 -= 12
+    rock_x_pos1 -= 19
     if rock_x_pos1 < -100: rock_x_pos1 = 1000
 
     screen.blit(rock2,(rock_x_pos2,250))
-    rock_x_pos2 -= 9
+    rock_x_pos2 -= 15
     if rock_x_pos2 < -100: rock_x_pos2 = 1000
 
     screen.blit(rock3,(rock_x_pos3,350))
-    rock_x_pos3 -= 8
+    rock_x_pos3 -= 14
     if rock_x_pos3 < -100: rock_x_pos3 = 1000
 
     screen.blit(rock4,(rock_x_pos4,450))
-    rock_x_pos4 -= 11
+    rock_x_pos4 -= 18
     if rock_x_pos4 < -100: rock_x_pos4 = 1000
+
+
 
     #updates
     pygame.display.update()
