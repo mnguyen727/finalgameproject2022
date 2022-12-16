@@ -111,9 +111,10 @@ while True:
     while a > 0: 
         screen.blit(bg,(0,0))   
 
-        #instantiates all rock sprites and movement
+        #instantiates all rock sprites and moves the rocks to the left at varying speeds.
         screen.blit(rock,(rock_x_pos,50))
         rock_x_pos -= 10
+        #once the rock reaches -100 on the x-axis it will blit the rock back to the right side of the screen.
         if rock_x_pos < -100: rock_x_pos = 1345
 
         screen.blit(rock1,(rock_x_pos1,150))
@@ -152,23 +153,27 @@ while True:
         #instantiates ship posiition and movement
         screen.blit(ship,(ship_x_pos,ship_y_pos))
         
+        #if w is pressed ship moves up
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
                 ship_y_pos -= 5
 
+        #if s is pressed ship moves down
         keys = pygame.key.get_pressed()
         if keys[pygame.K_s]:
                 ship_y_pos += 5
 
+        #if a is pressed ship moves left
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
                 ship_x_pos -= 7
 
+        #if d is pressed ships moves right
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d]:
                 ship_x_pos += 7
 
-        #my attempt at instantiating a bullet (it just puts the bullet on top of ship)
+        #my attempt at instantiating a bullet (it just puts the bullet on top of ship) press p key
         keys = pygame.key.get_pressed()
         if keys[pygame.K_p]:
             screen.blit(bullet,(ship_x_pos,ship_y_pos)) 
